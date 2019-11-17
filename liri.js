@@ -1,71 +1,96 @@
 require("dotenv").config();
 
 var keys = require("./keys.js");
-var spotify = new Spotify(keys.spotify);
+var fs = require("fs");
 
 var command = process.argv[2];
+var query = process.argv[3];
 
 switch (command){
-    case "spotify":
-        console.log("this will call the function");
+    //this will call the spotify function
+    case "spotify-this-song":
+        spotifyCall(query);
         break;
-    case "bandsintown":
-        console.log("this will call bandsintown function");
+    //this will call the bandsintown function
+    case "concert-this":
+        concertThis(query);
         break;
-    case "omdb":
-        console.log("this will call omdb function");
+    //this will call the omdb function
+    case "movie-this":
+        movieThis(query);
         break;
+    //this will execute "do what it says"
     case "do-what-it-says":
-        console.log("this will call do-what-it-says function");
+        fs.readFile("random.txt", "utf8", function (error, data) {
+          var data = data.split(",");
+          var thatWay = data[1];
+          if (error) {
+              return console.log(error);
+          }
         break;
-};
+}
 
 //Create function for "concert this"
 //Bands in town
-
+var bandsintown = require("bandsintown");
+ 
+function concertThis(artist) {
+  var bandsQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+  
+  axios.get(bandsQueryUrl).then(
+      function (response) {
+          console.log("Upcoming Events" + 
+          "\nArtist: " + artist + 
+          "\nVenue: " + response.data[0].venue.name +
+          "\nLocation: " + response.data[0].venue.country + 
+          "\nDate: " + response.data[0].datatime);
+      });
+      json = JSON.stringify(json, undefined, 2);
+}
 
 //Create function for "spotify-this-song"
 //Spotify
-var Spotify = require('node-spotify-api');
+var Spotify = require("node-spotify-api");
+var spotify = new Spotify(keys.spotify);
  
-var spotify = new Spotify({
-  id: keys.spotify.id,
-  secret: keys.spotify.secret,
-});
- 
-spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
-  else {
-    console.log(JSON.stringify(data[0], null, 2));
-  }
- 
-console.log(data); 
-});
+function spotifyCall(songName) {
+  spotify.search({ type: "track", query: songName }, function (err, data) {
+      if (err) {
+          return console.log("Error occurred: " + err);
+      }
+      console.log("\n_Track Info_" + 
+      "\nArtist: " + data.tracks.items[0].artists[0].name + 
+      "\nSong: " + data.tracks.items[0].name + 
+      "\nLink: " + data.tracks.items[0].external_urls.spotify + 
+      "\nAlbum: " + data.tracks.items[0].album.name)
+  });
+  json = JSON.stringify(json, undefined, 2);
+}
+
 
 //Create function for "movie-this"
 //OMDB
-var omdb = require('omdb');
- 
-omdb.search('saw', function(err, movies) {
-    if(err) {
-        return console.error(err);
-    }
- 
-    if(movies.length < 1) {
-        return console.log('No movies were found!');
-    }
- 
-    movies.forEach(function(movie) {
-        console.log('%s (%d)', movie.title, movie.year);
-    });
- 
-    // Saw (2004)
-    // Saw II (2005)
-    // Saw III (2006)
-    // Saw IV (2007)
-    // ...
-});
+var axios = require("axios");
 
-//Create function for "do-what-it-says"
+function movieThis(movieName) {
+  if (!movieName) {
+      movieName = "Mr. Nobody";
+  }
+  var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=e1be5eb5";
+
+  axios.get(queryUrl).then(
+      function (response) {
+          if (!movieName) {
+              movieName = "Mr. Nobody";
+          console.log("\n_Movie Info_" + 
+          "\nTitle: " + response.data.Title + 
+          "\nRelease Year: " + response.data.Year + 
+          "\nRating: " + response.data.Rated + 
+          "\nRelease Country: " + response.data.Country + 
+          "\nLanguage: " + response.data.Language + 
+          "\nPlot: " + response.data.Plot + 
+          "\nActors: " + response.data.Actors);
+      }
+      json = JSON.stringify(json, undefined, 2);
+    })
+  };
