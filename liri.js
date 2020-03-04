@@ -46,7 +46,7 @@ function concertThis(artist) {
           "\nDate: " + response.data[0].datatime);
       });
       json = JSON.stringify(json, undefined, 2);
-}
+};
 
 //Create function for "spotify-this-song"
 //Spotify
@@ -93,4 +93,4 @@ function movieThis(movieName) {
       }
       json = JSON.stringify(json, undefined, 2);
     })
-  };
+};
