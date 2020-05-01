@@ -4,7 +4,7 @@ LIRI is a Language Interpretation and Recognition Interface using the command li
 
 # Setup
 
-1. Clone the repository
+
 
 2. Run npm install, and the following packages should be installed:
 
