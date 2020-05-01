@@ -1,6 +1,6 @@
 # liri-node-app
 
-LIRI is a Language Interpretation and Recognition Interface using the command line to take in parameters and return data about movies, music, and concerts!
+
 
 # Setup
 
