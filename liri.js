@@ -26,7 +26,7 @@ switch (command){
           var thatWay = data[1];
           if (error) {
               return console.log(error);
-          }
+          };
         break;
 }
 
@@ -57,7 +57,7 @@ function spotifyCall(songName) {
   spotify.search({ type: "track", query: songName }, function (err, data) {
       if (err) {
           return console.log("Error occurred: " + err);
-      }
+      };
       console.log("\n_Track Info_" + 
       "\nArtist: " + data.tracks.items[0].artists[0].name + 
       "\nSong: " + data.tracks.items[0].name + 
@@ -65,7 +65,7 @@ function spotifyCall(songName) {
       "\nAlbum: " + data.tracks.items[0].album.name)
   });
   json = JSON.stringify(json, undefined, 2);
-}
+};
 
 
 //Create function for "movie-this"
@@ -93,4 +93,4 @@ function movieThis(movieName) {
       }
       json = JSON.stringify(json, undefined, 2);
     })
-};
+}
