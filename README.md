@@ -21,7 +21,7 @@ LIRI is a Language Interpretation and Recognition Interface using the command li
 
     'SPOTIFY_SECRET=your-spotify-secret-here'
 
-# Liri Functions:
+# Liri Functions
 
 * concert-this: 
 - Example: `node liri.js concert-this Jay-Z`
@@ -52,3 +52,6 @@ Movie Title, Release Date, Rating, Country of Release, Language, Plot, Actors
 * `do-what-it-says` will show:
 
 The text inside the file random.txt, using it to call the command with the given parameter.
+
+# Screenshot
+![Screenshot](https://i.ibb.co/C9Bns1k/liri-screenshot.png)
