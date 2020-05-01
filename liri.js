@@ -32,7 +32,7 @@ switch (command){
 
 //Create function for "concert this"
 //Bands in town
-var bandsintown = require("bandsintown");
+let bandsintown = require("bandsintown");
  
 function concertThis(artist) {
   var bandsQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
@@ -72,7 +72,7 @@ function spotifyCall(songName) {
 //OMDB
 var axios = require("axios");
 
-function movieThis(movieName) {
+function movieThis(movieName){
   if (!movieName) {
       movieName = "Mr. Nobody";
   }
