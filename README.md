@@ -21,7 +21,7 @@ LIRI is a Language Interpretation and Recognition Interface using the command li
 
     'SPOTIFY_SECRET=your-spotify-secret-here'
 
-# Liri Functions
+
 
 * concert-this: 
 - Example: `node liri.js concert-this Jay-Z`
